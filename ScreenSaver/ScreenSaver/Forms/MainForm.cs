@@ -16,5 +16,10 @@ namespace ScreenSaver.Forms
         {
             InitializeComponent();
         }
+
+        private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Close();
+        }
     }
 }
