@@ -69,5 +69,15 @@ namespace ScreenSaver.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] snowFlake {
+            get {
+                object obj = ResourceManager.GetObject("snowFlake", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

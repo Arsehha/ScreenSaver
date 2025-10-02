@@ -121,4 +121,7 @@
   <data name="gory_sneg_zima_132544_1920x1080" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gory_sneg_zima_132544_1920x1080.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="snowFlake" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\—Pngtree—the snowflake png_14562847.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
