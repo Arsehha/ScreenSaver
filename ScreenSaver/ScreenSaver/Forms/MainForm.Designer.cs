@@ -28,20 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 500);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "MainForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MainForm";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainForm_KeyPress);
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 500);
+            FormBorderStyle = FormBorderStyle.None;
+            Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "MainForm";
+            WindowState = FormWindowState.Maximized;
+            KeyPress += MainForm_KeyPress;
+            MouseClick += MainForm_MouseClick;
+            ResumeLayout(false);
 
         }
 
