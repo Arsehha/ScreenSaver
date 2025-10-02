@@ -15,16 +15,19 @@ namespace ScreenSaver.Forms
 {
     public partial class MainForm : Form
     {
-        private Random rnd = new Random(); 
+        private Random rnd = new Random();
         private System.Windows.Forms.Timer timer;
+
         private const int TimerInterval = 16;
-        private float biasForX = 0.8f; // Скорость смещения по горизонтали
-        private float biasForY = 8.3f; // Скорость смещения по вертикали
-        private Image snowFlakeImage = null!;
+        private const float BiasForX = 0.8f; // Скорость смещения по горизонтали
+        private const float BiasForY = 8.3f; // Скорость смещения по вертикали
         private const int MinFlakeSize = 30;
         private const int MaxFlakeSize = 60;
-        private List<SnowFlake> snowFlakes = new List<SnowFlake>();
         private const int MaxSnowFlakes = 150;
+
+        private Image snowFlakeImage;
+        private List<SnowFlake> snowFlakes = new List<SnowFlake>();
+
 
         /// <summary>
         /// Конструктор формы
@@ -32,6 +35,11 @@ namespace ScreenSaver.Forms
         public MainForm()
         {
             InitializeComponent();
+
+            SetStyle(ControlStyles.AllPaintingInWmPaint |
+             ControlStyles.UserPaint |
+             ControlStyles.DoubleBuffer, true);
+
             var backGround = new MemoryStream(Properties.Resources.gory_sneg_zima_132544_1920x1080);
             var memoryStream = new MemoryStream(Properties.Resources.snowFlake);
             BackgroundImage = Image.FromStream(backGround);
@@ -46,7 +54,6 @@ namespace ScreenSaver.Forms
         private void CreateSnowFlakes()
         {
             var screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            var screenHeight = Screen.PrimaryScreen.Bounds.Height;
 
             for (int i = 0; i < MaxSnowFlakes; i++)
             {
@@ -57,19 +64,19 @@ namespace ScreenSaver.Forms
                     X = rnd.Next(0, screenWidth),
                     Y = rnd.Next(-500, 0),
                     Size = size,
-                    Speed = biasForY * (MinFlakeSize / (float)size)
+                    Speed = BiasForY * (MinFlakeSize / (float)size)
                 });
             }
         }
 
         /// <summary>
-        /// Инициализаия и запуск таймера
+        /// Инициализация и запуск таймера
         /// </summary>
         private void StartTimer()
         {
             timer = new System.Windows.Forms.Timer();
             timer.Interval = TimerInterval;
-            timer.Tick += (s, e) =>
+            timer.Tick += (_, _) =>
             {
                 MoveSnowFlakes();
                 Invalidate();
@@ -84,7 +91,7 @@ namespace ScreenSaver.Forms
         {
             foreach (var flake in snowFlakes)
             {
-                flake.X += biasForX;
+                flake.X += BiasForX;
                 flake.Y += flake.Speed;
 
                 if (flake.Y > Height + 10 || flake.X > Width + 10)
@@ -95,7 +102,10 @@ namespace ScreenSaver.Forms
             }
         }
 
-        // Метод отрисовки снежинок
+        /// <summary>
+        /// Метод отрисовки снежинок
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnPaint(PaintEventArgs e)
         {
             var g = e.Graphics;
@@ -112,21 +122,11 @@ namespace ScreenSaver.Forms
             }
         }
 
-        /// <summary>
-        /// Закритие при нажатии клавиш на клавиатуре
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
         {
             Close();
         }
 
-        /// <summary>
-        /// Закритие при нажатии кнопок мыши
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void MainForm_MouseClick(object sender, MouseEventArgs e)
         {
             Close();
